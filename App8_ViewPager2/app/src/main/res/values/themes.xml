@@ -1,11 +1,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.App7_Fragment" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Base.Theme.App8_ViewPager2" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">@color/blue</item>
         <item name="colorPrimaryVariant">@color/blue</item>
         <item name="android:statusBarColor">@color/blue</item>
     </style>
 
-    <style name="Theme.App7_Fragment" parent="Base.Theme.App7_Fragment" />
+    <style name="Theme.App8_ViewPager2" parent="Base.Theme.App8_ViewPager2" />
 </resources>
