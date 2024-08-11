@@ -18,9 +18,8 @@ class MainActivity : AppCompatActivity() {
         "In which year, first Android was released by Google?")
 
     private val options = arrayOf(arrayOf("MySQL", "SQLite", "Firebase"),
-        arrayOf("Application Programming Interface", "Android Programming Interface", "Android Package Information",
-            arrayOf("2010", "2008", "2006")
-        )
+        arrayOf("Application Programming Interface", "Android Programming Interface", "Android Package Information"),
+        arrayOf("2010", "2008", "2006")
     )
 
     private val correctAnswers = arrayOf(1, 0, 2)
@@ -39,6 +38,22 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        displayQuestion()
+
+        binding.apply {
+            btnAnswer1.setOnClickListener {
+                checkAnswer(0)
+            }
+            btnAnswer2.setOnClickListener {
+                checkAnswer(1)
+            }
+            btnAnswer3.setOnClickListener {
+                checkAnswer(2)
+            }
+            btnReset.setOnClickListener {
+                restartQuiz()
+            }
+        }
     }
 
     private fun correctButtonColor(buttonIndex : Int) {
@@ -56,7 +71,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun resetButtonColor() {
+    private fun resetButtonsColors() {
         binding.apply {
             btnAnswer1.setBackgroundColor(Color.rgb(50, 59, 96))
             btnAnswer2.setBackgroundColor(Color.rgb(50, 59, 96))
@@ -64,8 +79,63 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun enableButtons() {
+        binding.apply {
+            btnAnswer1.isEnabled = true
+            btnAnswer2.isEnabled = true
+            btnAnswer3.isEnabled = true
+        }
+    }
+
+    private fun disableButtons() {
+        binding.apply {
+            btnAnswer1.isEnabled = false
+            btnAnswer2.isEnabled = false
+            btnAnswer3.isEnabled = false
+        }
+    }
+
     private fun showResult() {
         Toast.makeText(this, "Result: ${score} out of ${questions.size}", Toast.LENGTH_LONG).show()
         binding.btnReset.isEnabled = true
+    }
+
+    private fun displayQuestion() {
+        binding.apply {
+            tvQuestion.text = questions[currentQuestionIndex]
+            btnAnswer1.text = options[currentQuestionIndex][0].toString()
+            btnAnswer2.text = options[currentQuestionIndex][1].toString()
+            btnAnswer3.text = options[currentQuestionIndex][2].toString()
+        }
+        resetButtonsColors()
+        enableButtons()
+    }
+
+    private fun checkAnswer(selectedAnswerIndex : Int) {
+        if(selectedAnswerIndex == correctAnswers[currentQuestionIndex]) {
+            score++
+            correctButtonColor(selectedAnswerIndex)
+        }
+        else {
+            correctButtonColor(correctAnswers[currentQuestionIndex])
+            wrongButtonColor(selectedAnswerIndex)
+        }
+
+        if(currentQuestionIndex < questions.size - 1) {
+            currentQuestionIndex++
+            disableButtons()
+            binding.tvQuestion.postDelayed({displayQuestion()}, 1000)
+        }
+        else {
+            showResult()
+            disableButtons()
+        }
+    }
+
+    private fun restartQuiz() {
+        currentQuestionIndex = 0
+        score = 0
+        displayQuestion()
+        binding.btnReset.isEnabled = false
     }
 }
