@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "391730410796",
+    "project_id": "crud-realtime-client-3699b",
+    "storage_bucket": "crud-realtime-client-3699b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:391730410796:android:771afbe4f18c43ecd72889",
+        "android_client_info": {
+          "package_name": "com.example.app21_datastoragefrd"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDieKD9Gm0Tpp3XhDQwjx_YrcBaI1nCChQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:391730410796:android:b918c1ed7483f302d72889",
+        "android_client_info": {
+          "package_name": "com.example.app21_datastoragefrdadmin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDieKD9Gm0Tpp3XhDQwjx_YrcBaI1nCChQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

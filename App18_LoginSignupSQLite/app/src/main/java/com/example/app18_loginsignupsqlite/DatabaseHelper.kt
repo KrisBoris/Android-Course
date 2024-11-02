@@ -26,9 +26,7 @@ class DatabaseHelper(private val context : Context) :
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        val dropTableQuery = "DROP TABLE IF EXISTS $TABLE_NAME"
-        db?.execSQL(dropTableQuery)
-        onCreate(db)
+
     }
 
     override fun onDowngrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
@@ -36,6 +34,11 @@ class DatabaseHelper(private val context : Context) :
     }
 
     fun insertUser(username : String, password : String) : Long {
+        val dropTableQuery = "DROP TABLE IF EXISTS $TABLE_NAME"
+        val db1 = writableDatabase
+        db1?.execSQL(dropTableQuery)
+        onCreate(db1)
+
         val values = ContentValues().apply {
             put(COLUMN_USERNAME, username)
             put(COLUMN_PASSWORD, password)

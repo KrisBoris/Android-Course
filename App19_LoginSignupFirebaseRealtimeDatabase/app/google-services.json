@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "661514185838",
+    "project_id": "app19-firebaserealtimedatabase",
+    "storage_bucket": "app19-firebaserealtimedatabase.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:661514185838:android:0e9c96d1b37ddcb97d8a7f",
+        "android_client_info": {
+          "package_name": "com.example.app19_loginsignupfirebaserealtimedatabase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPOnLJHuCOKRCFAchi5HVnDRiyCfBDEF8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
