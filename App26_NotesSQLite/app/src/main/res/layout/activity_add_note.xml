@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".AddNoteActivity">
+
+    <TextView
+        android:id="@+id/tvAddNoteHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins"
+        android:text="Add Note"
+        android:textSize="24sp"
+        android:textColor="@color/orange"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivSaveButton"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_check"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etTitle"
+        android:hint="Enter the title"
+        android:textSize="24sp"
+        android:maxLines="1"
+        android:fontFamily="@font/poppins"
+        android:padding="8dp"
+        android:background="@drawable/orange_border"
+        android:layout_below="@id/tvAddNoteHeading"
+        android:layout_marginTop="16dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/etContent"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins"
+        android:hint="Enter the description"
+        android:gravity="top"
+        android:padding="12dp"
+        android:background="@drawable/orange_border"
+        android:layout_below="@id/etTitle"
+        android:layout_marginTop="12dp"/>
+
+</RelativeLayout>

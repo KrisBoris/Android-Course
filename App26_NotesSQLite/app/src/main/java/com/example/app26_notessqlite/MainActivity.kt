@@ -1,18 +1,19 @@
-package com.example.app21_datastoragefrdadmin
+package com.example.app26_notessqlite
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.app21_datastoragefrdadmin.databinding.ActivityMainBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.app26_notessqlite.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
+    private lateinit var db: NoteDatabaseHelper
+    private lateinit var notesRvAdapter: NotesRvAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -24,18 +25,19 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        binding.btnUpload.setOnClickListener {
-            val intent = Intent(this@MainActivity, UploadActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+        db = NoteDatabaseHelper(this)
+        notesRvAdapter = NotesRvAdapter(db.getAllNotes(), this@MainActivity)
 
-        binding.btnUpdate.setOnClickListener {
-            startActivity(Intent(this@MainActivity, UpdateActivity::class.java))
-        }
+        binding.rvNotes.layoutManager = LinearLayoutManager(this@MainActivity)
+        binding.rvNotes.adapter = notesRvAdapter
 
-        binding.btnDelete.setOnClickListener {
-            startActivity(Intent(this@MainActivity, DeleteActivity::class.java))
+        binding.fabAddNote.setOnClickListener {
+            startActivity(Intent(this@MainActivity, AddNoteActivity::class.java))
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        notesRvAdapter.refreshData(db.getAllNotes())
     }
 }
