@@ -1,6 +1,7 @@
 package com.example.app26_notessqlite
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -26,6 +27,20 @@ class UpdateNoteActivity : AppCompatActivity() {
 
         db = NoteDatabaseHelper(this@UpdateNoteActivity)
 
+        noteId = intent.getIntExtra("note_id", -1)
+        if(noteId == -1) {
+            finish()
+            return
+        }
 
+        val note = db.getNoteById(noteId)
+        binding.etUpdateTitle.setText(note.title)
+        binding.etUpdateContent.setText(note.content)
+
+        binding.ivUpdateButton.setOnClickListener {
+            db.updateNote(Note(noteId, binding.etUpdateTitle.text.toString(), binding.etUpdateContent.text.toString()))
+            finish()
+            Toast.makeText(this@UpdateNoteActivity, "Changes saved", Toast.LENGTH_SHORT).show()
+        }
     }
 }

@@ -35,7 +35,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/etTitle"
+        android:id="@+id/etAddTitle"
         android:hint="Enter the title"
         android:textSize="24sp"
         android:maxLines="1"
@@ -48,14 +48,14 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/etContent"
+        android:id="@+id/etAddContent"
         android:textSize="16sp"
         android:fontFamily="@font/poppins"
         android:hint="Enter the description"
         android:gravity="top"
         android:padding="12dp"
         android:background="@drawable/orange_border"
-        android:layout_below="@id/etTitle"
+        android:layout_below="@id/etAddTitle"
         android:layout_marginTop="12dp"/>
 
 </RelativeLayout>

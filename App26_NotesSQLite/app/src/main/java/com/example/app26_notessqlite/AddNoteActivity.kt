@@ -26,7 +26,7 @@ class AddNoteActivity : AppCompatActivity() {
         db = NoteDatabaseHelper(this@AddNoteActivity)
 
         binding.ivSaveButton.setOnClickListener {
-            db.insertNote(Note(0, binding.etTitle.text.toString(), binding.etContent.text.toString()))
+            db.insertNote(Note(0, binding.etAddTitle.text.toString(), binding.etAddContent.text.toString()))
             finish()
             Toast.makeText(this@AddNoteActivity, "Note saved successfully", Toast.LENGTH_SHORT).show()
         }
