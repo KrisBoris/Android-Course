@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="false"
     tools:context=".ui.NewsActivity">
 
     <FrameLayout
@@ -28,13 +29,15 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         android:id="@+id/bottomNavigationView"
         app:menu="@menu/bottom_navigation_menu"
         app:itemTextColor="@color/white"
         app:itemIconTint="@color/white"
         android:background="@color/purple"
         app:itemActiveIndicatorStyle="@style/App.Custom.Indicator"
+        android:layout_gravity="bottom"
+        app:elevation="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>

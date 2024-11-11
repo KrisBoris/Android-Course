@@ -1,11 +1,10 @@
 package com.example.app42_newsapp.api
 
-import com.example.app42_newsapp.util.Constans.Companion.BASE_URL
+import com.example.app42_newsapp.util.Constants.Companion.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
 class RetrofitInstance {
 
