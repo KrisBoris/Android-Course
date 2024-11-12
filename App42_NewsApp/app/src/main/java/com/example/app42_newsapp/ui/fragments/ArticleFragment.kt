@@ -13,8 +13,8 @@ import com.google.android.material.snackbar.Snackbar
 
 class ArticleFragment : Fragment(R.layout.fragment_article) {
 
+    private val args: ArticleFragmentArgs by navArgs()
     lateinit var newsViewModel: NewsViewModel
-    val args: ArticleFragmentArgs by navArgs()
     lateinit var binding: FragmentArticleBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

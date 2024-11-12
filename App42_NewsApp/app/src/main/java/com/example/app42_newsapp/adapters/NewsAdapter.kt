@@ -14,12 +14,13 @@ import com.example.app42_newsapp.models.Article
 
 class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
 
-    inner class ArticleViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
-    lateinit var articleImage: ImageView
-    lateinit var articleSource: TextView
-    lateinit var articleTitle: TextView
-    lateinit var articleDescription: TextView
-    lateinit var articleDateTime: TextView
+    inner class ArticleViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+        val articleImage: ImageView = itemView.findViewById(R.id.ivArticleImage)
+        val articleSource: TextView = itemView.findViewById(R.id.tvSource)
+        val articleTitle: TextView = itemView.findViewById(R.id.tvTitle)
+        val articleDescription: TextView = itemView.findViewById(R.id.tvDescription)
+        val articleDateTime: TextView = itemView.findViewById(R.id.tvDateTime)
+    }
 
     private val differCallback = object : DiffUtil.ItemCallback<Article>() {
         override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
@@ -47,20 +48,14 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
         val article = differ.currentList[position]
 
-        articleImage = holder.itemView.findViewById(R.id.ivArticleImage)
-        articleSource = holder.itemView.findViewById(R.id.tvSource)
-        articleTitle = holder.itemView.findViewById(R.id.tvTitle)
-        articleDescription = holder.itemView.findViewById(R.id.tvDescription)
-        articleDateTime = holder.itemView.findViewById(R.id.tvDateTime)
-
-        holder.itemView.apply {
-            Glide.with(this).load(article.urlToImage).into(articleImage)
-            articleSource.text = article.source.name
+        holder.apply {
+            Glide.with(itemView).load(article.urlToImage).into(articleImage)
+            articleSource.text = article.source?.name
             articleTitle.text = article.title
             articleDescription.text = article.description
             articleDateTime.text = article.publishedAt
 
-            setOnClickListener {
+            itemView.setOnClickListener {
                 onItemClickListener?.let {
                     it(article)
                 }
@@ -71,5 +66,4 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
     fun setOnItemClickListener(listener: (Article) -> Unit) {
         onItemClickListener = listener
     }
-
 }

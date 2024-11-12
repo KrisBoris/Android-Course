@@ -2,6 +2,7 @@ package com.example.app42_newsapp.ui.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
@@ -42,10 +43,10 @@ class HeadlinesFragment : Fragment(R.layout.fragment_headlines) {
         itemHeadlinesError = view.findViewById(R.id.itemHeadlinesError)
 
         val inflater = requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view: View = inflater.inflate(R.layout.item_error, null)
+        val errorView: View = inflater.inflate(R.layout.item_error, binding.root, false)
 
-        retryButton = view.findViewById(R.id.btnRefresh)
-        errorText = view.findViewById(R.id.tvErrorMessage)
+        retryButton = errorView.findViewById(R.id.btnRefresh)
+        errorText = errorView.findViewById(R.id.tvErrorMessage)
         newsViewModel = (activity as NewsActivity).newsViewModel
         setupHeadlinesRecycler()
 
@@ -143,6 +144,7 @@ class HeadlinesFragment : Fragment(R.layout.fragment_headlines) {
     }
 
     private fun setupHeadlinesRecycler() {
+        Log.i("TEST", "Setting up recycler")
         newsAdapter = NewsAdapter()
         binding.rvHeadlines.apply {
             adapter = newsAdapter
