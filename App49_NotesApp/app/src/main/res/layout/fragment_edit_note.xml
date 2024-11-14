@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="12dp"
+    tools:context=".fragments.EditNoteFragment">
+
+    <TextView
+        android:id="@+id/tvEditNoteHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit Note"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/poppins"
+        android:textColor="@color/red"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="12dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etEditNoteTitle"
+        android:hint="Edit the title"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/poppins"
+        android:background="@drawable/orange_border"
+        android:maxLines="1"
+        android:padding="12dp"
+        android:layout_below="@id/tvEditNoteHeading"
+        android:layout_marginTop="16dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/etEditNoteContent"
+        android:hint="Edit the description"
+        android:textSize="18sp"
+        android:fontFamily="@font/poppins"
+        android:background="@drawable/orange_border"
+        android:gravity="top"
+        android:padding="12dp"
+        android:layout_below="@id/etEditNoteTitle"
+        android:layout_marginTop="12dp"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fabEditNote"
+        android:backgroundTint="@color/orange"
+        android:tintMode="@color/white"
+        android:src="@drawable/ic_done"
+        android:clickable="true"
+        android:contentDescription="editFab"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"/>
+
+</RelativeLayout>
+
+</layout>
