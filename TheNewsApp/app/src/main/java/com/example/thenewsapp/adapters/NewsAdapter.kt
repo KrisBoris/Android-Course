@@ -3,6 +3,7 @@ package com.example.thenewsapp.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -15,11 +16,6 @@ import com.example.thenewsapp.models.Article
 class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
 
     inner class ArticleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
-    lateinit var articleImage: ImageView
-    lateinit var articleSource: TextView
-    lateinit var articleTitle: TextView
-    lateinit var articleDescription: TextView
-    lateinit var articleDateTime: TextView
 
     private val differCallback = object : DiffUtil.ItemCallback<Article>(){
         override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
@@ -48,21 +44,22 @@ class NewsAdapter: RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
         val article = differ.currentList[position]
 
-        articleImage = holder.itemView.findViewById(R.id.articleImage)
-        articleSource = holder.itemView.findViewById(R.id.articleSource)
-        articleTitle = holder.itemView.findViewById(R.id.articleTitle)
-        articleDescription = holder.itemView.findViewById(R.id.articleDescription)
-        articleDateTime = holder.itemView.findViewById(R.id.articleDateTime)
+        val articleImage = holder.itemView.findViewById<ImageView>(R.id.articleImage)
+        val articleSource = holder.itemView.findViewById<TextView>(R.id.articleSource)
+        val articleTitle = holder.itemView.findViewById<TextView>(R.id.articleTitle)
+        val articleDescription = holder.itemView.findViewById<TextView>(R.id.articleDescription)
+        val articleDateTime = holder.itemView.findViewById<TextView>(R.id.articleDateTime)
 
         holder.itemView.apply {
             Glide.with(this).load(article.urlToImage).into(articleImage)
-            articleSource.text = article.source?.name
+            articleSource.text = article.source.name
             articleTitle.text = article.title
             articleDescription.text = article.description
             articleDateTime.text = article.publishedAt
 
             setOnClickListener {
                 onItemClickListener?.let {
+                    // Passes 'article' as a parameter
                     it(article)
                 }
             }
