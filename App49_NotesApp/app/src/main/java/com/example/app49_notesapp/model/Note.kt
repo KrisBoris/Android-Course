@@ -11,7 +11,7 @@ format that can be transferred between activities and fragments */
 @Parcelize
 data class Note(
     @PrimaryKey(autoGenerate = true)
-    val id: Int
+    val id: Int,
     val noteTitle: String,
     val noteDescription: String
 ): Parcelable
