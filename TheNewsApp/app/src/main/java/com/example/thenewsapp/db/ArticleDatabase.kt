@@ -18,12 +18,18 @@ abstract class ArticleDatabase: RoomDatabase() {
 
     abstract fun getArticleDao(): ArticleDAO
 
-    companion object{
+    companion object {
+
+        // Volatile - Prevents threads from using outdated references to the instance
         @Volatile
         private var instance: ArticleDatabase? = null
+
+        // used for synchronizing database creation to ensure that
+        // only one thread can initialize the instance at a time.
         private val LOCK = Any()
 
-        operator fun invoke(context: Context) = instance ?: synchronized(LOCK){
+        // Allows the class to be called like a function
+        operator fun invoke(context: Context) = instance ?: synchronized(LOCK) {
             instance ?: createDatabase(context).also {
                 instance = it
             }

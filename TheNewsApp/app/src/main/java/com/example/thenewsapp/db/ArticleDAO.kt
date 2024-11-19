@@ -11,6 +11,9 @@ import com.example.thenewsapp.models.Article
 @Dao
 interface ArticleDAO {
 
+    // If a conflict occurs (e.g.attempting to
+    // insert a row with a primary key that already exists in the table)
+    // than the existing row in the database will be replaced by the new row.
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsert(article: Article): Long
 

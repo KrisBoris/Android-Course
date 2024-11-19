@@ -40,12 +40,12 @@ class NewsViewModel(app: Application, val newsRepository: NewsRepository): Andro
     }
 
     private fun handleHeadlinesResponse(response: Response<NewsResponse>): Resource<NewsResponse>{
-        if (response.isSuccessful){
+        if (response.isSuccessful) {
             response.body()?.let { resultResponse ->
                 headlinesPage++
-                if (headlinesResponse == null){
+                if (headlinesResponse == null) {
                     headlinesResponse = resultResponse
-                } else{
+                } else {
                     val oldArticles = headlinesResponse?.articles
                     val newArticles = resultResponse.articles
                     oldArticles?.addAll(newArticles)
@@ -85,7 +85,7 @@ class NewsViewModel(app: Application, val newsRepository: NewsRepository): Andro
         newsRepository.deleteArticle(article)
     }
 
-    fun internetConnection(context: Context): Boolean {
+    private fun internetConnection(context: Context): Boolean {
         (context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).apply {
             return getNetworkCapabilities(activeNetwork)?.run {
                 when {

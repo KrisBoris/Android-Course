@@ -12,8 +12,14 @@ interface NewsAPI {
     suspend fun getHeadlines(
         @Query("country")
         countryCode: String = "us",
+
+        /**
+         * Use this to page through the results if
+         * the total results found is greater than the page size.
+         * */
         @Query("page")
         pageNumber: Int = 1,
+
         @Query("apiKey")
         apiKey: String = API_KEY
     ): Response<NewsResponse>

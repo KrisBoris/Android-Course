@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.Button
 import android.widget.TextView
@@ -46,10 +45,10 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         itemSearchError = view.findViewById(R.id.itemSearchError)
 
         val inflater = requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view: View = inflater.inflate(R.layout.item_error, null)
+        val viewError: View = inflater.inflate(R.layout.item_error, null)
 
-        retryButton = view.findViewById(R.id.retryButton)
-        errorText = view.findViewById(R.id.errorText)
+        retryButton = viewError.findViewById(R.id.retryButton)
+        errorText = viewError.findViewById(R.id.errorText)
 
         newsViewModel = (activity as NewsActivity).newsViewModel
         setupSearchRecycler()
@@ -61,6 +60,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             findNavController().navigate(R.id.action_searchFragment_to_articleFragment, bundle)
         }
 
+        // Manages search in coroutine
         var job: Job? = null
         binding.searchEdit.addTextChangedListener(){ editable ->
             job?.cancel()

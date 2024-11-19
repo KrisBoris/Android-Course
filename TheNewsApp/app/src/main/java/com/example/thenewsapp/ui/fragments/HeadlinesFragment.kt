@@ -2,7 +2,6 @@ package com.example.thenewsapp.ui.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
@@ -36,14 +35,13 @@ class HeadlinesFragment : Fragment(R.layout.fragment_headlines) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHeadlinesBinding.bind(view)
 
-
         itemHeadlinesError = view.findViewById(R.id.itemHeadlinesError)
 
         val inflater = requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view: View = inflater.inflate(R.layout.item_error, null)
+        val viewError: View = inflater.inflate(R.layout.item_error, null)
 
-        retryButton = view.findViewById(R.id.retryButton)
-        errorText = view.findViewById(R.id.errorText)
+        retryButton = viewError.findViewById(R.id.retryButton)
+        errorText = viewError.findViewById(R.id.errorText)
 
         newsViewModel = (activity as NewsActivity).newsViewModel
         setupHeadlinesRecycler()
@@ -56,14 +54,19 @@ class HeadlinesFragment : Fragment(R.layout.fragment_headlines) {
         }
 
         newsViewModel.headlines.observe(viewLifecycleOwner, Observer { response ->
-            when(response){
+            when (response) {
                 is Resource.Success<*> -> {
                     hideProgressBar()
                     hideErrorMessage()
                     response.data?.let {newsResponse ->
                         newsAdapter.differ.submitList(newsResponse.articles.toList())
+
+                        // +2 in case of new headlines appearing
                         val totalPages = newsResponse.totalResults / Constants.QUERY_PAGE_SIZE + 2
+
                         isLastPage = newsViewModel.headlinesPage == totalPages
+
+                        // Resize the recycler; there won't be new articles
                         if (isLastPage){
                             binding.recyclerHeadlines.setPadding(0,0,0,0)
                         }
@@ -126,10 +129,15 @@ class HeadlinesFragment : Fragment(R.layout.fragment_headlines) {
             val isNoErrors = !isError
             val isNotLoadingAndNotLastPage = !isLoading && !isLastPage
             val isAtLastItem = firstVisibleItemPosition + visibleItemCount >= totalItemCount
+
+            // To avoid paginating while scrolling up
             val isNotAtBeginning = firstVisibleItemPosition >= 0
+            // Ensures that there is more data for pagination
             val isTotalMoreThanVisible = totalItemCount >= Constants.QUERY_PAGE_SIZE
+
             val shouldPaginate =
-                isNoErrors && isNotLoadingAndNotLastPage && isAtLastItem && isNotAtBeginning && isTotalMoreThanVisible && isScrolling
+                isNoErrors && isNotLoadingAndNotLastPage && isAtLastItem
+                        && isNotAtBeginning && isTotalMoreThanVisible && isScrolling
             if (shouldPaginate) {
                 newsViewModel.getHeadlines("us")
                 isScrolling = false
